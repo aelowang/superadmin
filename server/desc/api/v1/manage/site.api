@@ -1,0 +1,131 @@
+syntax = "v1"
+
+info (
+	go_package: "v1/manage/site"
+)
+
+import (
+	"../../common/request.api"
+	"../../common/response.api"
+)
+
+type ManageSite {
+	Uuid           string `json:"uuid"`
+	SiteName       string `json:"siteName"`
+	SiteLogo       string `json:"siteLogo"`
+	PriceCurrency  string `json:"priceCurrency"`
+	ScoreStatType  string `json:"scoreStatType"`
+	Status         string `json:"status"`
+	Remark         string `json:"remark"`
+	DbHost         string `json:"dbHost"`
+	DbUsername     string `json:"dbUsername"`
+	DbPassword     string `json:"dbPassword"`
+	DbPort         int64  `json:"dbPort"`
+	DbName         string `json:"dbName"`
+	JwtSecret      string `json:"jwtSecret"`
+	AdminUrl       string `json:"adminUrl"`
+	AdminUsername  string `json:"adminUsername"`
+	ContactName    string `json:"contactName"`
+	ContactPhone   string `json:"contactPhone"`
+	ContactEmail   string `json:"contactEmail"`
+	RemainingScore string `json:"remainingScore"`
+	TotalTopup     string `json:"totalTopup"`
+	CreateTime     string `json:"createTime"`
+	UpdateTime     string `json:"updateTime"`
+}
+
+type ListRequest {
+	PageRequest
+	SiteName      string `form:"siteName,optional"`
+	PriceCurrency string `form:"priceCurrency,optional"`
+	Status        string `form:"status,optional"`
+}
+
+type ListResponse {
+	PageResponse
+	Records []ManageSite `json:"records"`
+}
+
+type GetAllRequest {}
+
+type GetAllResponse {
+	Uuid          string `json:"uuid"`
+	SiteName      string `json:"siteName"`
+	PriceCurrency string `json:"priceCurrency"`
+}
+
+type AddRequest {
+	SiteName      string `json:"siteName"`
+	SiteLogo      string `json:"siteLogo,optional"`
+	PriceCurrency string `json:"priceCurrency"`
+	ScoreStatType string `json:"scoreStatType,optional"`
+	Status        string `json:"status,default=1"`
+	Remark        string `json:"remark,optional"`
+	DbHost        string `json:"dbHost"`
+	DbUsername    string `json:"dbUsername"`
+	DbPassword    string `json:"dbPassword"`
+	DbPort        int64  `json:"dbPort"`
+	DbName        string `json:"dbName"`
+	JwtSecret     string `json:"jwtSecret"`
+	AdminUrl      string `json:"adminUrl"`
+	AdminUsername string `json:"adminUsername"`
+	ContactName   string `json:"contactName,optional"`
+	ContactPhone  string `json:"contactPhone,optional"`
+	ContactEmail  string `json:"contactEmail,optional"`
+}
+
+type AddResponse {}
+
+type EditRequest {
+	Uuid          string `json:"uuid"`
+	SiteName      string `json:"siteName"`
+	SiteLogo      string `json:"siteLogo,optional"`
+	PriceCurrency string `json:"priceCurrency"`
+	ScoreStatType string `json:"scoreStatType,optional"`
+	Status        string `json:"status"`
+	Remark        string `json:"remark,optional"`
+	DbHost        string `json:"dbHost"`
+	DbUsername    string `json:"dbUsername"`
+	DbPassword    string `json:"dbPassword"`
+	DbPort        int64  `json:"dbPort"`
+	DbName        string `json:"dbName"`
+	JwtSecret     string `json:"jwtSecret"`
+	AdminUrl      string `json:"adminUrl"`
+	AdminUsername string `json:"adminUsername"`
+	ContactName   string `json:"contactName,optional"`
+	ContactPhone  string `json:"contactPhone,optional"`
+	ContactEmail  string `json:"contactEmail,optional"`
+}
+
+type EditResponse {}
+
+type DeleteRequest {
+	Uuids []string `json:"uuids"`
+}
+
+type DeleteResponse {}
+
+@server (
+	prefix:          /api/v1
+	group:           v1/manage/site
+	compact_handler: true
+	jwt:             Jwt
+	middleware:      Authx
+)
+service server {
+	@handler List
+	get /manage/getSiteList (ListRequest) returns (ListResponse)
+
+	@handler GetAll
+	get /manage/getAllSites (GetAllRequest) returns ([]GetAllResponse)
+
+	@handler Add
+	post /manage/addSite (AddRequest) returns (AddResponse)
+
+	@handler Edit
+	post /manage/editSite (EditRequest) returns (EditResponse)
+
+	@handler Delete
+	post /manage/deleteSite (DeleteRequest) returns (DeleteResponse)
+}
+

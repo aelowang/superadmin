@@ -1,0 +1,25 @@
+banner:
+    text: jzero-admin
+
+rest:
+    name: jzero-admin-api
+    host: 0.0.0.0
+    port: 8001
+    timeout: 20000
+
+log:
+    encoding: plain
+    level: info
+    mode: console
+
+sqlx:
+   datasource: "${DATASOURCE:-root:12345678@tcp(127.0.0.1:3306)/jzero-admin?charset=utf8mb4&parseTime=True&loc=Local}"
+   driverName: "${DRIVER_NAME:-mysql}"
+#    datasource: "${DATASOURCE:-postgres://root:123456@localhost:5432/jzero-admin}"
+#    driverName: "${DRIVER_NAME:-pgx}"
+    # datasource: "${DATASOURCE:-jzero-admin.db}"
+    # driverName: "${DRIVER_NAME:-sqlite}"
+
+redis:
+    miniRedis: ${REDIS_MINI_REDIS:-true}
+    host: "${REDIS_HOST:-127.0.0.1:6379}"

@@ -7,12 +7,12 @@ services:
       - TZ=Asia/Shanghai
 
       # 使用 sqlite
-      - DRIVER_NAME=sqlite
-      - DATASOURCE=postgres://root:123456@postgres:5432/jzero-admin
+      # - DRIVER_NAME=sqlite
+      # - DATASOURCE=postgres://root:123456@postgres:5432/jzero-admin
 
 #      # 使用 mysql
-#      - DRIVER_NAME=mysql
-#      - DATASOURCE=root:123456@tcp(mysql:3306)/jzero-admin?charset=utf8mb4&parseTime=True&loc=Local
+      - DRIVER_NAME=mysql
+      - DATASOURCE=root:123456@tcp(mysql:3306)/jzero-admin?charset=utf8mb4&parseTime=True&loc=Local
 
 #      # 使用 postgres
 #      - DRIVER_NAME=pgx

@@ -26,5 +26,8 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   manage_role: () => import("@/views/manage/role/index.vue"),
   "manage_user-detail": () => import("@/views/manage/user-detail/[uuid].vue"),
   manage_user: () => import("@/views/manage/user/index.vue"),
+  site_deduction: () => import("@/views/site/deduction/index.vue"),
+  site_list: () => import("@/views/site/list/index.vue"),
+  site_topup: () => import("@/views/site/topup/index.vue"),
   "user-center": () => import("@/views/user-center/index.vue"),
 };

@@ -1,0 +1,533 @@
+{
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "info": {
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/v1/manage/addSite": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "接口权限编码:v1:manage:site:add",
+        "operationId": "v1/Manage/SiteAdd",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "adminUrl": {
+                  "type": "string"
+                },
+                "adminUsername": {
+                  "type": "string"
+                },
+                "contactEmail": {
+                  "type": "string"
+                },
+                "contactName": {
+                  "type": "string"
+                },
+                "contactPhone": {
+                  "type": "string"
+                },
+                "dbHost": {
+                  "type": "string"
+                },
+                "dbName": {
+                  "type": "string"
+                },
+                "dbPassword": {
+                  "type": "string"
+                },
+                "dbPort": {
+                  "type": "integer"
+                },
+                "dbUsername": {
+                  "type": "string"
+                },
+                "jwtSecret": {
+                  "type": "string"
+                },
+                "priceCurrency": {
+                  "type": "string"
+                },
+                "remark": {
+                  "type": "string"
+                },
+                "scoreStatType": {
+                  "type": "string"
+                },
+                "siteLogo": {
+                  "type": "string"
+                },
+                "siteName": {
+                  "type": "string"
+                },
+                "status": {
+                  "default": "1",
+                  "example": "1",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "siteName",
+                "priceCurrency",
+                "status",
+                "dbHost",
+                "dbUsername",
+                "dbPassword",
+                "dbPort",
+                "dbName",
+                "jwtSecret",
+                "adminUrl",
+                "adminUsername"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "Add",
+        "tags": [
+          "v1/manage/site"
+        ]
+      }
+    },
+    "/api/v1/manage/deleteSite": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "接口权限编码:v1:manage:site:delete",
+        "operationId": "v1/Manage/SiteDelete",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "uuids": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "uuids"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "Delete",
+        "tags": [
+          "v1/manage/site"
+        ]
+      }
+    },
+    "/api/v1/manage/editSite": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "接口权限编码:v1:manage:site:edit",
+        "operationId": "v1/Manage/SiteEdit",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "adminUrl": {
+                  "type": "string"
+                },
+                "adminUsername": {
+                  "type": "string"
+                },
+                "contactEmail": {
+                  "type": "string"
+                },
+                "contactName": {
+                  "type": "string"
+                },
+                "contactPhone": {
+                  "type": "string"
+                },
+                "dbHost": {
+                  "type": "string"
+                },
+                "dbName": {
+                  "type": "string"
+                },
+                "dbPassword": {
+                  "type": "string"
+                },
+                "dbPort": {
+                  "type": "integer"
+                },
+                "dbUsername": {
+                  "type": "string"
+                },
+                "jwtSecret": {
+                  "type": "string"
+                },
+                "priceCurrency": {
+                  "type": "string"
+                },
+                "remark": {
+                  "type": "string"
+                },
+                "scoreStatType": {
+                  "type": "string"
+                },
+                "siteLogo": {
+                  "type": "string"
+                },
+                "siteName": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "uuid",
+                "siteName",
+                "priceCurrency",
+                "status",
+                "dbHost",
+                "dbUsername",
+                "dbPassword",
+                "dbPort",
+                "dbName",
+                "jwtSecret",
+                "adminUrl",
+                "adminUsername"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "Edit",
+        "tags": [
+          "v1/manage/site"
+        ]
+      }
+    },
+    "/api/v1/manage/getAllSites": {
+      "get": {
+        "description": "接口权限编码:v1:manage:site:getAll",
+        "operationId": "v1/Manage/SiteGetAll",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "items": {
+                "properties": {
+                  "priceCurrency": {
+                    "type": "string"
+                  },
+                  "siteName": {
+                    "type": "string"
+                  },
+                  "uuid": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "uuid",
+                  "siteName",
+                  "priceCurrency"
+                ],
+                "type": "object"
+              },
+              "properties": {
+                "priceCurrency": {
+                  "type": "string"
+                },
+                "siteName": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                }
+              },
+              "type": "array"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "GetAll",
+        "tags": [
+          "v1/manage/site"
+        ]
+      }
+    },
+    "/api/v1/manage/getSiteList": {
+      "get": {
+        "description": "接口权限编码:v1:manage:site:list",
+        "operationId": "v1/Manage/SiteList",
+        "parameters": [
+          {
+            "allowEmptyValue": true,
+            "default": 1,
+            "in": "query",
+            "name": "current",
+            "type": "integer"
+          },
+          {
+            "allowEmptyValue": true,
+            "default": 10,
+            "in": "query",
+            "name": "size",
+            "type": "integer"
+          },
+          {
+            "allowEmptyValue": true,
+            "in": "query",
+            "name": "siteName",
+            "type": "string"
+          },
+          {
+            "allowEmptyValue": true,
+            "in": "query",
+            "name": "priceCurrency",
+            "type": "string"
+          },
+          {
+            "allowEmptyValue": true,
+            "in": "query",
+            "name": "status",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "properties": {
+                "current": {
+                  "type": "integer"
+                },
+                "records": {
+                  "items": {
+                    "properties": {
+                      "adminUrl": {
+                        "type": "string"
+                      },
+                      "adminUsername": {
+                        "type": "string"
+                      },
+                      "contactEmail": {
+                        "type": "string"
+                      },
+                      "contactName": {
+                        "type": "string"
+                      },
+                      "contactPhone": {
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "type": "string"
+                      },
+                      "dbHost": {
+                        "type": "string"
+                      },
+                      "dbName": {
+                        "type": "string"
+                      },
+                      "dbPassword": {
+                        "type": "string"
+                      },
+                      "dbPort": {
+                        "type": "integer"
+                      },
+                      "dbUsername": {
+                        "type": "string"
+                      },
+                      "jwtSecret": {
+                        "type": "string"
+                      },
+                      "priceCurrency": {
+                        "type": "string"
+                      },
+                      "remainingScore": {
+                        "type": "string"
+                      },
+                      "remark": {
+                        "type": "string"
+                      },
+                      "scoreStatType": {
+                        "type": "string"
+                      },
+                      "siteLogo": {
+                        "type": "string"
+                      },
+                      "siteName": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "totalTopup": {
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "type": "string"
+                      },
+                      "uuid": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "uuid",
+                      "siteName",
+                      "siteLogo",
+                      "priceCurrency",
+                      "scoreStatType",
+                      "status",
+                      "remark",
+                      "dbHost",
+                      "dbUsername",
+                      "dbPassword",
+                      "dbPort",
+                      "dbName",
+                      "jwtSecret",
+                      "adminUrl",
+                      "adminUsername",
+                      "contactName",
+                      "contactPhone",
+                      "contactEmail",
+                      "remainingScore",
+                      "totalTopup",
+                      "createTime",
+                      "updateTime"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "size": {
+                  "type": "integer"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "List",
+        "tags": [
+          "v1/manage/site"
+        ]
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKey": {
+      "description": "Enter Authorization",
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0"
+}

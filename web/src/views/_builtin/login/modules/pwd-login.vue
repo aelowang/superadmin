@@ -63,14 +63,14 @@ async function handleSubmit() {
       <NButton type="primary" size="large" round block :loading="authStore.loginLoading" @click="handleSubmit">
         {{ $t('common.confirm') }}
       </NButton>
-      <div class="flex-y-center justify-between gap-12px">
+      <!-- <div class="flex-y-center justify-between gap-12px">
         <NButton class="flex-1" block @click="toggleLoginModule('code-login')">
           {{ $t(loginModuleRecord['code-login'], { type: $t('page.login.codeLogin.emailType') }) }}
         </NButton>
         <NButton class="flex-1" block @click="toggleLoginModule('register')">
           {{ $t(loginModuleRecord.register) }}
         </NButton>
-      </div>
+      </div> -->
     </NSpace>
   </NForm>
 </template>

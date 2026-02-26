@@ -11,6 +11,9 @@ import (
 	v1auth "github.com/jzero-io/jzero-admin/server/internal/handler/v1/auth"
 	v1managemenu "github.com/jzero-io/jzero-admin/server/internal/handler/v1/manage/menu"
 	v1managerole "github.com/jzero-io/jzero-admin/server/internal/handler/v1/manage/role"
+	v1managesite "github.com/jzero-io/jzero-admin/server/internal/handler/v1/manage/site"
+	v1managesite_deduction "github.com/jzero-io/jzero-admin/server/internal/handler/v1/manage/site_deduction"
+	v1managesite_topup "github.com/jzero-io/jzero-admin/server/internal/handler/v1/manage/site_topup"
 	v1manageuser "github.com/jzero-io/jzero-admin/server/internal/handler/v1/manage/user"
 	v1route "github.com/jzero-io/jzero-admin/server/internal/handler/v1/route"
 	version "github.com/jzero-io/jzero-admin/server/internal/handler/version"
@@ -173,6 +176,84 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 						Method:  http.MethodPost,
 						Path:    "/manage/updateRoleHome",
 						Handler: v1managerole.UpdateHome(serverCtx),
+					},
+				}...,
+			),
+			rest.WithJwt(serverCtx.MustGetConfig().Jwt.AccessSecret),
+			rest.WithPrefix("/api/v1"),
+		)
+	}
+	{
+		server.AddRoutes(
+			rest.WithMiddlewares(
+				[]rest.Middleware{serverCtx.Authx},
+				[]rest.Route{
+					{
+						Method:  http.MethodPost,
+						Path:    "/manage/addSite",
+						Handler: v1managesite.Add(serverCtx),
+					},
+					{
+						Method:  http.MethodPost,
+						Path:    "/manage/deleteSite",
+						Handler: v1managesite.Delete(serverCtx),
+					},
+					{
+						Method:  http.MethodPost,
+						Path:    "/manage/editSite",
+						Handler: v1managesite.Edit(serverCtx),
+					},
+					{
+						Method:  http.MethodGet,
+						Path:    "/manage/getAllSites",
+						Handler: v1managesite.GetAll(serverCtx),
+					},
+					{
+						Method:  http.MethodGet,
+						Path:    "/manage/getSiteList",
+						Handler: v1managesite.List(serverCtx),
+					},
+				}...,
+			),
+			rest.WithJwt(serverCtx.MustGetConfig().Jwt.AccessSecret),
+			rest.WithPrefix("/api/v1"),
+		)
+	}
+	{
+		server.AddRoutes(
+			rest.WithMiddlewares(
+				[]rest.Middleware{serverCtx.Authx},
+				[]rest.Route{
+					{
+						Method:  http.MethodPost,
+						Path:    "/manage/addSiteDeduction",
+						Handler: v1managesite_deduction.Add(serverCtx),
+					},
+					{
+						Method:  http.MethodGet,
+						Path:    "/manage/getSiteDeductionList",
+						Handler: v1managesite_deduction.List(serverCtx),
+					},
+				}...,
+			),
+			rest.WithJwt(serverCtx.MustGetConfig().Jwt.AccessSecret),
+			rest.WithPrefix("/api/v1"),
+		)
+	}
+	{
+		server.AddRoutes(
+			rest.WithMiddlewares(
+				[]rest.Middleware{serverCtx.Authx},
+				[]rest.Route{
+					{
+						Method:  http.MethodPost,
+						Path:    "/manage/addSiteTopup",
+						Handler: v1managesite_topup.Add(serverCtx),
+					},
+					{
+						Method:  http.MethodGet,
+						Path:    "/manage/getSiteTopupList",
+						Handler: v1managesite_topup.List(serverCtx),
 					},
 				}...,
 			),

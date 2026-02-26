@@ -1,0 +1,219 @@
+{
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "info": {
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/v1/manage/addSiteTopup": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "接口权限编码:v1:manage:site_topup:add",
+        "operationId": "v1/Manage/SiteTopupAdd",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "remark": {
+                  "type": "string"
+                },
+                "score": {
+                  "type": "string"
+                },
+                "siteUuid": {
+                  "type": "string"
+                },
+                "topupMethod": {
+                  "type": "string"
+                },
+                "topupStatus": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "siteUuid",
+                "score",
+                "topupMethod"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "Add",
+        "tags": [
+          "v1/manage/site_topup"
+        ]
+      }
+    },
+    "/api/v1/manage/getSiteTopupList": {
+      "get": {
+        "description": "接口权限编码:v1:manage:site_topup:list",
+        "operationId": "v1/Manage/SiteTopupList",
+        "parameters": [
+          {
+            "allowEmptyValue": true,
+            "default": 1,
+            "in": "query",
+            "name": "current",
+            "type": "integer"
+          },
+          {
+            "allowEmptyValue": true,
+            "default": 10,
+            "in": "query",
+            "name": "size",
+            "type": "integer"
+          },
+          {
+            "allowEmptyValue": true,
+            "in": "query",
+            "name": "siteUuid",
+            "type": "string"
+          },
+          {
+            "allowEmptyValue": true,
+            "in": "query",
+            "name": "topupStatus",
+            "type": "string"
+          },
+          {
+            "allowEmptyValue": true,
+            "in": "query",
+            "name": "siteName",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "properties": {
+                "current": {
+                  "type": "integer"
+                },
+                "records": {
+                  "items": {
+                    "properties": {
+                      "createTime": {
+                        "type": "string"
+                      },
+                      "operatorUuid": {
+                        "type": "string"
+                      },
+                      "priceCurrency": {
+                        "type": "string"
+                      },
+                      "remark": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "string"
+                      },
+                      "siteName": {
+                        "type": "string"
+                      },
+                      "siteUuid": {
+                        "type": "string"
+                      },
+                      "topupMethod": {
+                        "type": "string"
+                      },
+                      "topupStatus": {
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "type": "string"
+                      },
+                      "uuid": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "uuid",
+                      "siteUuid",
+                      "score",
+                      "topupMethod",
+                      "topupStatus",
+                      "remark",
+                      "siteName",
+                      "priceCurrency",
+                      "operatorUuid",
+                      "createTime",
+                      "updateTime"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "size": {
+                  "type": "integer"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "List",
+        "tags": [
+          "v1/manage/site_topup"
+        ]
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKey": {
+      "description": "Enter Authorization",
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0"
+}

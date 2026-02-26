@@ -187,6 +187,10 @@ const routeMap: RouteMap = {
   "manage_role": "/manage/role",
   "manage_user": "/manage/user",
   "manage_user-detail": "/manage/user-detail/:uuid",
+  "site": "/site",
+  "site_deduction": "/site/deduction",
+  "site_list": "/site/list",
+  "site_topup": "/site/topup",
   "user-center": "/user-center"
 };
 

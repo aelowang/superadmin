@@ -151,6 +151,52 @@ export const generatedRoutes: GeneratedRoute[] = [
     ]
   },
   {
+    name: 'site',
+    path: '/site',
+    component: 'layout.base',
+    meta: {
+      title: 'site',
+      i18nKey: 'route.site',
+      icon: 'mdi:web',
+      order: 3
+    },
+    children: [
+      {
+        name: 'site_deduction',
+        path: '/site/deduction',
+        component: 'view.site_deduction',
+        meta: {
+          title: 'site_deduction',
+          i18nKey: 'route.site_deduction',
+          icon: 'mdi:arrow-down-bold-circle',
+          order: 3
+        }
+      },
+      {
+        name: 'site_list',
+        path: '/site/list',
+        component: 'view.site_list',
+        meta: {
+          title: 'site_list',
+          i18nKey: 'route.site_list',
+          icon: 'mdi:format-list-bulleted',
+          order: 1
+        }
+      },
+      {
+        name: 'site_topup',
+        path: '/site/topup',
+        component: 'view.site_topup',
+        meta: {
+          title: 'site_topup',
+          i18nKey: 'route.site_topup',
+          icon: 'mdi:arrow-up-bold-circle',
+          order: 2
+        }
+      }
+    ]
+  },
+  {
     name: 'user-center',
     path: '/user-center',
     component: 'layout.base$view.user-center',

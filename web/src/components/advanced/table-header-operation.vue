@@ -47,13 +47,13 @@ function refresh() {
   <NSpace :align="itemAlign" wrap justify="end" class="lt-sm:w-200px">
     <slot name="prefix"></slot>
     <slot name="default">
-      <NButton v-if="addAuth && hasAuth(addAuth)" size="small" ghost type="primary" @click="add">
+      <NButton v-if="!addAuth || hasAuth(addAuth)" size="small" ghost type="primary" @click="add">
         <template #icon>
           <icon-ic-round-plus class="text-icon" />
         </template>
         {{ $t('common.add') }}
       </NButton>
-      <NPopconfirm v-if="deleteAuth && hasAuth(deleteAuth)" placement="bottom" @positive-click="batchDelete">
+      <NPopconfirm v-if="!deleteAuth || hasAuth(deleteAuth)" placement="bottom" @positive-click="batchDelete">
         <template #trigger>
           <NButton size="small" ghost type="error" :disabled="disabledDelete">
             <template #icon>

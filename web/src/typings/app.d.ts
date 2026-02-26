@@ -419,6 +419,17 @@ declare namespace App {
             edit: string;
           };
         };
+        site: {
+          add: string;
+          edit: string;
+          delete: string;
+        };
+        siteTopup: {
+          add: string;
+        };
+        siteDeduction: {
+          add: string;
+        };
       };
       page: {
         login: {
@@ -624,6 +635,80 @@ declare namespace App {
             iconType: {
               iconify: string;
               local: string;
+            };
+          };
+        };
+        site: {
+          title: string;
+          siteName: string;
+          siteLogo: string;
+          priceCurrency: string;
+          scoreStatType: string;
+          status: string;
+          remark: string;
+          dbHost: string;
+          dbPort: string;
+          dbName: string;
+          dbUsername: string;
+          dbPassword: string;
+          jwtSecret: string;
+          adminUrl: string;
+          adminUsername: string;
+          contactName: string;
+          contactPhone: string;
+          contactEmail: string;
+          remainingScore: string;
+          totalTopup: string;
+          basicInfo: string;
+          dbInfo: string;
+          adminInfo: string;
+          contactInfo: string;
+          addSite: string;
+          editSite: string;
+          form: {
+            siteName: string;
+            siteLogo: string;
+            priceCurrency: string;
+            status: string;
+            remark: string;
+            dbHost: string;
+            dbPort: string;
+            dbName: string;
+            dbUsername: string;
+            dbPassword: string;
+            jwtSecret: string;
+            adminUrl: string;
+            adminUsername: string;
+            contactName: string;
+            contactPhone: string;
+            contactEmail: string;
+          };
+          topup: {
+            title: string;
+            score: string;
+            topupMethod: string;
+            topupStatus: string;
+            operateTime: string;
+            addTopup: string;
+            form: {
+              selectSite: string;
+              score: string;
+              topupMethod: string;
+              topupStatus: string;
+            };
+          };
+          deduction: {
+            title: string;
+            score: string;
+            deductionMethod: string;
+            deductionStatus: string;
+            operateTime: string;
+            addDeduction: string;
+            form: {
+              selectSite: string;
+              score: string;
+              deductionMethod: string;
+              deductionStatus: string;
             };
           };
         };

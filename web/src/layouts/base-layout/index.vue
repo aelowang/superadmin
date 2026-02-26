@@ -135,9 +135,9 @@ function getSiderCollapsedWidth() {
     <GlobalMenu />
     <GlobalContent />
     <ThemeDrawer />
-    <template #footer>
+    <!-- <template #footer>
       <GlobalFooter />
-    </template>
+    </template> -->
   </AdminLayout>
 </template>
 

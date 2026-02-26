@@ -1,6 +1,6 @@
 const local: App.I18n.Schema = {
   system: {
-    title: 'jzero-admin',
+    title: 'super-admin',
     updateTitle: 'System Version Update Notification',
     updateContent: 'A new version of the system has been detected. Do you want to refresh the page immediately?',
     updateConfirm: 'Refresh immediately',
@@ -172,6 +172,10 @@ const local: App.I18n.Schema = {
     'manage_user-detail': 'User Detail',
     manage_role: 'Role Manage',
     manage_menu: 'Menu Manage',
+    site: 'Site Manage',
+    site_list: 'Site List',
+    site_topup: 'Topup Records',
+    site_deduction: 'Deduction Records',
     exception: 'Exception',
     exception_403: '403',
     exception_404: '404',
@@ -197,6 +201,17 @@ const local: App.I18n.Schema = {
         edit: 'Edit Role',
         delete: 'Delete Role'
       }
+    },
+    site: {
+      add: 'Add Site',
+      edit: 'Edit Site',
+      delete: 'Delete Site'
+    },
+    siteTopup: {
+      add: 'Add Topup'
+    },
+    siteDeduction: {
+      add: 'Add Deduction'
     }
   },
   page: {
@@ -252,7 +267,7 @@ const local: App.I18n.Schema = {
     },
     about: {
       title: 'About',
-      introduction: `jzero-admin builds the backend system based on jzero scaffolding and is equipped with code generation, and the front end is built based on soybean-admin.`,
+      introduction: `super-admin builds the backend system based on jzero scaffolding and is equipped with code generation, and the front end is built based on soybean-admin.`,
       projectInfo: {
         title: 'Project Info',
         version: 'Version',
@@ -404,6 +419,80 @@ const local: App.I18n.Schema = {
         iconType: {
           iconify: 'Iconify Icon',
           local: 'Local Icon'
+        }
+      }
+    },
+    site: {
+      title: 'Site List',
+      siteName: 'Site Name',
+      siteLogo: 'Site Logo',
+      priceCurrency: 'Currency',
+      scoreStatType: 'Score Stat Type',
+      status: 'Status',
+      remark: 'Remark',
+      dbHost: 'DB Host',
+      dbPort: 'DB Port',
+      dbName: 'DB Name',
+      dbUsername: 'DB Username',
+      dbPassword: 'DB Password',
+      jwtSecret: 'JWT Secret',
+      adminUrl: 'Admin URL',
+      adminUsername: 'Admin Username',
+      contactName: 'Contact',
+      contactPhone: 'Contact Phone',
+      contactEmail: 'Contact Email',
+      remainingScore: 'Remaining Score',
+      totalTopup: 'Total Topup',
+      basicInfo: 'Basic Info',
+      dbInfo: 'Database Config',
+      adminInfo: 'Admin Config',
+      contactInfo: 'Contact Info',
+      addSite: 'Add Site',
+      editSite: 'Edit Site',
+      form: {
+        siteName: 'Please enter site name',
+        siteLogo: 'Please enter site logo URL',
+        priceCurrency: 'Please enter currency',
+        status: 'Please select status',
+        remark: 'Please enter remark',
+        dbHost: 'Please enter DB host',
+        dbPort: 'Please enter DB port',
+        dbName: 'Please enter DB name',
+        dbUsername: 'Please enter DB username',
+        dbPassword: 'Please enter DB password',
+        jwtSecret: 'Please enter JWT secret',
+        adminUrl: 'Please enter admin URL',
+        adminUsername: 'Please enter admin username',
+        contactName: 'Please enter contact name',
+        contactPhone: 'Please enter contact phone',
+        contactEmail: 'Please enter contact email'
+      },
+      topup: {
+        title: 'Topup Records',
+        score: 'Topup Score',
+        topupMethod: 'Topup Method',
+        topupStatus: 'Topup Status',
+        operateTime: 'Operate Time',
+        addTopup: 'Add Topup',
+        form: {
+          selectSite: 'Please select site',
+          score: 'Please enter topup score',
+          topupMethod: 'Please enter topup method',
+          topupStatus: 'Please enter topup status'
+        }
+      },
+      deduction: {
+        title: 'Deduction Records',
+        score: 'Deduction Score',
+        deductionMethod: 'Deduction Method',
+        deductionStatus: 'Deduction Status',
+        operateTime: 'Operate Time',
+        addDeduction: 'Add Deduction',
+        form: {
+          selectSite: 'Please select site',
+          score: 'Please enter deduction score',
+          deductionMethod: 'Please enter deduction method',
+          deductionStatus: 'Please enter deduction status'
         }
       }
     }

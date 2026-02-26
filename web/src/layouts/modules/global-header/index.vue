@@ -41,13 +41,13 @@ const href = (url: string) => {
       <GlobalBreadcrumb v-if="!appStore.isMobile" class="ml-12px" />
     </div>
     <div class="h-full flex-y-center justify-end">
-      <ButtonIcon
+      <!-- <ButtonIcon
         v-if="!appStore.isMobile"
         tooltip-content="Github"
         class="color-#010409 xl:block sm:hidden dark:color-#e6edf3"
         icon="simple-icons:github"
         @click="href('https://github.com/jzero-io/jzero-admin')"
-      />
+      /> -->
 
       <GlobalSearch />
       <FullScreen v-if="!appStore.isMobile" :full="isFullscreen" @click="toggle" />
@@ -57,8 +57,8 @@ const href = (url: string) => {
         :is-dark="themeStore.darkMode"
         @switch="themeStore.toggleThemeScheme"
       />
-      <ThemeButton />
-      <UserAvatar />
+      <!-- <ThemeButton /> -->
+      <!-- <UserAvatar /> -->
     </div>
   </DarkModeContainer>
 </template>

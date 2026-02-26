@@ -1,0 +1,62 @@
+syntax = "v1"
+
+info (
+	go_package: "v1/manage/site_deduction"
+)
+
+import (
+	"../../common/request.api"
+	"../../common/response.api"
+)
+
+type ManageSiteDeduction {
+	Uuid            string `json:"uuid"`
+	SiteUuid        string `json:"siteUuid"`
+	Score           string `json:"score"`
+	DeductionMethod string `json:"deductionMethod"`
+	DeductionStatus string `json:"deductionStatus"`
+	Remark          string `json:"remark"`
+	SiteName        string `json:"siteName"`
+	PriceCurrency   string `json:"priceCurrency"`
+	OperatorUuid    string `json:"operatorUuid"`
+	CreateTime      string `json:"createTime"`
+	UpdateTime      string `json:"updateTime"`
+}
+
+type ListRequest {
+	PageRequest
+	SiteUuid        string `form:"siteUuid,optional"`
+	DeductionStatus string `form:"deductionStatus,optional"`
+	SiteName        string `form:"siteName,optional"`
+}
+
+type ListResponse {
+	PageResponse
+	Records []ManageSiteDeduction `json:"records"`
+}
+
+type AddRequest {
+	SiteUuid        string `json:"siteUuid"`
+	Score           string `json:"score"`
+	DeductionMethod string `json:"deductionMethod"`
+	DeductionStatus string `json:"deductionStatus,optional"`
+	Remark          string `json:"remark,optional"`
+}
+
+type AddResponse {}
+
+@server (
+	prefix:          /api/v1
+	group:           v1/manage/site_deduction
+	compact_handler: true
+	jwt:             Jwt
+	middleware:      Authx
+)
+service server {
+	@handler List
+	get /manage/getSiteDeductionList (ListRequest) returns (ListResponse)
+
+	@handler Add
+	post /manage/addSiteDeduction (AddRequest) returns (AddResponse)
+}
+

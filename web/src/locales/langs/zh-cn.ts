@@ -1,6 +1,6 @@
 const local: App.I18n.Schema = {
   system: {
-    title: 'jzero-admin',
+    title: 'super-admin',
     updateTitle: '系统版本更新通知',
     updateContent: '检测到系统有新版本发布，是否立即刷新页面？',
     updateConfirm: '立即刷新',
@@ -172,6 +172,10 @@ const local: App.I18n.Schema = {
     'manage_user-detail': '用户详情',
     manage_role: '角色管理',
     manage_menu: '菜单管理',
+    site: '站点管理',
+    site_list: '站点列表',
+    site_topup: '上分记录',
+    site_deduction: '下分记录',
     exception: '异常页',
     exception_403: '403',
     exception_404: '404',
@@ -197,6 +201,17 @@ const local: App.I18n.Schema = {
         delete: '删除角色',
         edit: '编辑角色'
       }
+    },
+    site: {
+      add: '新增站点',
+      edit: '编辑站点',
+      delete: '删除站点'
+    },
+    siteTopup: {
+      add: '添加上分'
+    },
+    siteDeduction: {
+      add: '添加下分'
     }
   },
   page: {
@@ -252,8 +267,8 @@ const local: App.I18n.Schema = {
     },
     about: {
       title: '关于',
-      introduction: `jzero-admin 基于 jzero 脚手架搭建后台系统并配备代码生成, 前端基于 soybean-admin 搭建。`,
-      projectInfo: {
+      introduction: `super-admin 基于 jzero 脚手架搭建后台系统并配备代码生成, 前端基于 soybean-admin 搭建。`,
+      projectInfo: {  
         title: '项目信息',
         version: '版本',
         latestBuildTime: '最新构建时间',
@@ -404,6 +419,80 @@ const local: App.I18n.Schema = {
         iconType: {
           iconify: 'iconify图标',
           local: '本地图标'
+        }
+      }
+    },
+    site: {
+      title: '站点列表',
+      siteName: '站点名称',
+      siteLogo: '站点Logo',
+      priceCurrency: '定价币种',
+      scoreStatType: '分值统计',
+      status: '状态',
+      remark: '备注',
+      dbHost: '数据库地址',
+      dbPort: '数据库端口',
+      dbName: '数据库名称',
+      dbUsername: '数据库用户名',
+      dbPassword: '数据库密码',
+      jwtSecret: 'JWT密钥',
+      adminUrl: '后台地址',
+      adminUsername: '管理员用户名',
+      contactName: '联系人',
+      contactPhone: '联系电话',
+      contactEmail: '联系邮箱',
+      remainingScore: '剩余分值',
+      totalTopup: '累计上分',
+      basicInfo: '基本信息',
+      dbInfo: '数据库配置',
+      adminInfo: '后台配置',
+      contactInfo: '联系人信息',
+      addSite: '新增站点',
+      editSite: '编辑站点',
+      form: {
+        siteName: '请输入站点名称',
+        siteLogo: '请输入站点Logo地址',
+        priceCurrency: '请输入定价币种',
+        status: '请选择状态',
+        remark: '请输入备注',
+        dbHost: '请输入数据库地址',
+        dbPort: '请输入数据库端口',
+        dbName: '请输入数据库名称',
+        dbUsername: '请输入数据库用户名',
+        dbPassword: '请输入数据库密码',
+        jwtSecret: '请输入JWT密钥',
+        adminUrl: '请输入后台地址',
+        adminUsername: '请输入管理员用户名',
+        contactName: '请输入联系人',
+        contactPhone: '请输入联系电话',
+        contactEmail: '请输入联系邮箱'
+      },
+      topup: {
+        title: '上分记录',
+        score: '上分分值',
+        topupMethod: '上分方式',
+        topupStatus: '上分状态',
+        operateTime: '操作时间',
+        addTopup: '添加上分',
+        form: {
+          selectSite: '请选择站点',
+          score: '请输入上分分值',
+          topupMethod: '请输入上分方式',
+          topupStatus: '请输入上分状态'
+        }
+      },
+      deduction: {
+        title: '下分记录',
+        score: '下分分值',
+        deductionMethod: '下分方式',
+        deductionStatus: '下分状态',
+        operateTime: '操作时间',
+        addDeduction: '添加下分',
+        form: {
+          selectSite: '请选择站点',
+          score: '请输入下分分值',
+          deductionMethod: '请输入下分方式',
+          deductionStatus: '请输入下分状态'
         }
       }
     }

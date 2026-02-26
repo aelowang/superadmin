@@ -11,26 +11,35 @@ import (
 	"github.com/jzero-io/jzero-admin/server/internal/model/manage_menu"
 	"github.com/jzero-io/jzero-admin/server/internal/model/manage_role"
 	"github.com/jzero-io/jzero-admin/server/internal/model/manage_role_menu"
+	"github.com/jzero-io/jzero-admin/server/internal/model/manage_site"
+	"github.com/jzero-io/jzero-admin/server/internal/model/manage_site_deduction"
+	"github.com/jzero-io/jzero-admin/server/internal/model/manage_site_topup"
 	"github.com/jzero-io/jzero-admin/server/internal/model/manage_user"
 	"github.com/jzero-io/jzero-admin/server/internal/model/manage_user_role"
 )
 
 type Model struct {
-	ManageEmail    manage_email.ManageEmailModel
-	ManageMenu     manage_menu.ManageMenuModel
-	ManageRole     manage_role.ManageRoleModel
-	ManageRoleMenu manage_role_menu.ManageRoleMenuModel
-	ManageUser     manage_user.ManageUserModel
-	ManageUserRole manage_user_role.ManageUserRoleModel
+	ManageEmail         manage_email.ManageEmailModel
+	ManageMenu          manage_menu.ManageMenuModel
+	ManageRole          manage_role.ManageRoleModel
+	ManageRoleMenu      manage_role_menu.ManageRoleMenuModel
+	ManageSite          manage_site.ManageSiteModel
+	ManageSiteDeduction manage_site_deduction.ManageSiteDeductionModel
+	ManageSiteTopup     manage_site_topup.ManageSiteTopupModel
+	ManageUser          manage_user.ManageUserModel
+	ManageUserRole      manage_user_role.ManageUserRoleModel
 }
 
 func NewModel(conn sqlx.SqlConn, op ...opts.Opt[modelx.ModelOpts]) Model {
 	return Model{
-		ManageEmail:    manage_email.NewManageEmailModel(conn, op...),
-		ManageMenu:     manage_menu.NewManageMenuModel(conn, op...),
-		ManageRole:     manage_role.NewManageRoleModel(conn, op...),
-		ManageRoleMenu: manage_role_menu.NewManageRoleMenuModel(conn, op...),
-		ManageUser:     manage_user.NewManageUserModel(conn, op...),
-		ManageUserRole: manage_user_role.NewManageUserRoleModel(conn, op...),
+		ManageEmail:         manage_email.NewManageEmailModel(conn, op...),
+		ManageMenu:          manage_menu.NewManageMenuModel(conn, op...),
+		ManageRole:          manage_role.NewManageRoleModel(conn, op...),
+		ManageRoleMenu:      manage_role_menu.NewManageRoleMenuModel(conn, op...),
+		ManageSite:          manage_site.NewManageSiteModel(conn, op...),
+		ManageSiteDeduction: manage_site_deduction.NewManageSiteDeductionModel(conn, op...),
+		ManageSiteTopup:     manage_site_topup.NewManageSiteTopupModel(conn, op...),
+		ManageUser:          manage_user.NewManageUserModel(conn, op...),
+		ManageUserRole:      manage_user_role.NewManageUserRoleModel(conn, op...),
 	}
 }
