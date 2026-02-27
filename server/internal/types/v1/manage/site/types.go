@@ -32,6 +32,15 @@ type AddRequest struct {
 type AddResponse struct {
 }
 
+type DeductionRequest struct {
+	Uuid   string `json:"uuid"`
+	Score  string `json:"score"`
+	Remark string `json:"remark,optional"`
+}
+
+type DeductionResponse struct {
+}
+
 type DeleteRequest struct {
 	Uuids []string `json:"uuids"`
 }
@@ -118,4 +127,20 @@ type PageResponse struct {
 	Current int   `json:"current"`
 	Size    int   `json:"size"`
 	Total   int64 `json:"total"`
+}
+
+type TopupRequest struct {
+	Uuid   string `json:"uuid"`
+	Score  string `json:"score"`
+	Remark string `json:"remark,optional"`
+}
+
+type TopupResponse struct {
+}
+
+type SyncRemoteScoreRequest struct {
+	Uuid string `json:"uuid"`
+}
+
+type SyncRemoteScoreResponse struct {
 }

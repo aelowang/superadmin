@@ -59,7 +59,7 @@ func (l *List) List(req *types.ListRequest) (resp *types.ListResponse, err error
 			DbName:         s.DbName,
 			JwtSecret:      "******",
 			AdminUrl:       s.AdminUrl,
-			AdminUsername:   s.AdminUsername,
+			AdminUsername:  s.AdminUsername,
 			ContactName:    s.ContactName,
 			ContactPhone:   s.ContactPhone,
 			ContactEmail:   s.ContactEmail,

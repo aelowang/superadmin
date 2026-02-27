@@ -205,7 +205,10 @@ const local: App.I18n.Schema = {
     site: {
       add: '新增站点',
       edit: '编辑站点',
-      delete: '删除站点'
+      delete: '删除站点',
+      topup: '上分',
+      deduction: '下分',
+      syncRemoteScore: '同步远程余额'
     },
     siteTopup: {
       add: '添加上分'
@@ -268,7 +271,7 @@ const local: App.I18n.Schema = {
     about: {
       title: '关于',
       introduction: `super-admin 基于 jzero 脚手架搭建后台系统并配备代码生成, 前端基于 soybean-admin 搭建。`,
-      projectInfo: {  
+      projectInfo: {
         title: '项目信息',
         version: '版本',
         latestBuildTime: '最新构建时间',
@@ -290,7 +293,7 @@ const local: App.I18n.Schema = {
         desc2: '2024 年 10 月 14 号创建了开源项目 jzero-admin!',
         desc3: '2025 年不断的改进完善ing!',
         desc4: '2025 年 11 月 30 号创建了开源项目 jzero-intellij!',
-        desc5: '2026 年 01 月 01 号发布了 jzero v1.0.0!',
+        desc5: '2026 年 01 月 01 号发布了 jzero v1.0.0!'
       },
       creativity: '创意'
     },
@@ -449,6 +452,17 @@ const local: App.I18n.Schema = {
       contactInfo: '联系人信息',
       addSite: '新增站点',
       editSite: '编辑站点',
+      quickTopup: '上分',
+      quickDeduction: '下分',
+      syncRemoteScore: '同步远程余额',
+      scoreModal: {
+        topupTitle: '站点上分',
+        deductionTitle: '站点下分',
+        score: '分值',
+        scorePlaceholder: '请输入分值',
+        remarkPlaceholder: '请输入备注（可选）',
+        currentScore: '当前剩余分值'
+      },
       form: {
         siteName: '请输入站点名称',
         siteLogo: '请输入站点Logo地址',

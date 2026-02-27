@@ -1,18 +1,22 @@
 <script setup lang="tsx">
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { NButton, NPopconfirm, NTag } from 'naive-ui';
-import { DeleteSite, GetSiteList } from '@/service/api';
+import { DeleteSite, GetSiteList, SyncRemoteSiteScore } from '@/service/api';
 import { $t } from '@/locales';
+import { useAuth } from '@/hooks/business/auth';
 import { useAppStore } from '@/store/modules/app';
 import { enableStatusRecord } from '@/constants/business';
 import { useTable, useTableOperate } from '@/hooks/common/table';
 import SiteOperateModal from './modules/site-operate-modal.vue';
+import SiteScoreModal from './modules/site-score-modal.vue';
 import SiteSearch from './modules/site-search.vue';
 
 const appStore = useAppStore();
+const { hasAuth } = useAuth();
 
 type LoadingStatus = Record<string, boolean>;
 const deleteLoadingStatus = reactive<LoadingStatus>({});
+const syncLoadingStatus = reactive<LoadingStatus>({});
 
 const {
   columns,
@@ -110,38 +114,55 @@ const {
       key: 'operate',
       title: $t('common.operate'),
       align: 'center',
-      width: 130,
+      width: 360,
       render: row => (
         <div class="flex-center gap-8px">
-          <NButton type="primary" ghost size="small" onClick={() => edit(row.uuid)}>
-            {$t('common.edit')}
-          </NButton>
-          <NPopconfirm onPositiveClick={() => handleDelete(row.uuid)}>
-            {{
-              default: () => $t('common.confirmDelete'),
-              trigger: () => (
-                <NButton loading={deleteLoadingStatus[row.uuid]} type="error" ghost size="small">
-                  {$t('common.delete')}
-                </NButton>
-              )
-            }}
-          </NPopconfirm>
+          {hasAuth('v1:manage:site:topup') && (
+            <NButton type="success" ghost size="small" onClick={() => openScoreModal('topup', row)}>
+              {$t('page.site.quickTopup')}
+            </NButton>
+          )}
+          {hasAuth('v1:manage:site:deduction') && (
+            <NButton type="warning" ghost size="small" onClick={() => openScoreModal('deduction', row)}>
+              {$t('page.site.quickDeduction')}
+            </NButton>
+          )}
+          {hasAuth('v1:manage:site:syncRemoteScore') && (
+            <NButton
+              type="info"
+              ghost
+              size="small"
+              loading={syncLoadingStatus[row.uuid]}
+              onClick={() => handleSyncRemoteScore(row.uuid)}
+            >
+              {$t('page.site.syncRemoteScore')}
+            </NButton>
+          )}
+          {hasAuth('v1:manage:site:edit') && (
+            <NButton type="primary" ghost size="small" onClick={() => edit(row.uuid)}>
+              {$t('common.edit')}
+            </NButton>
+          )}
+          {hasAuth('v1:manage:site:delete') && (
+            <NPopconfirm onPositiveClick={() => handleDelete(row.uuid)}>
+              {{
+                default: () => $t('common.confirmDelete'),
+                trigger: () => (
+                  <NButton loading={deleteLoadingStatus[row.uuid]} type="error" ghost size="small">
+                    {$t('common.delete')}
+                  </NButton>
+                )
+              }}
+            </NPopconfirm>
+          )}
         </div>
       )
     }
   ]
 });
 
-const {
-  drawerVisible,
-  operateType,
-  editingData,
-  handleAdd,
-  handleEdit,
-  checkedRowKeys,
-  onBatchDeleted,
-  onDeleted
-} = useTableOperate(data, getData);
+const { drawerVisible, operateType, editingData, handleAdd, handleEdit, checkedRowKeys, onBatchDeleted, onDeleted } =
+  useTableOperate(data, getData);
 
 async function handleBatchDelete() {
   const uuids: string[] = checkedRowKeys.value.map(uuid => uuid);
@@ -165,8 +186,30 @@ async function handleDelete(uuid: string) {
   onDeleted();
 }
 
+async function handleSyncRemoteScore(uuid: string) {
+  syncLoadingStatus[uuid] = true;
+  const { error } = await SyncRemoteSiteScore({ uuid });
+  syncLoadingStatus[uuid] = false;
+  if (error) return;
+  getDataByPage();
+}
+
 function edit(uuid: string) {
   handleEdit(uuid);
+}
+
+const scoreModalVisible = ref(false);
+const scoreModalType = ref<'topup' | 'deduction'>('topup');
+const scoreModalSiteUuid = ref('');
+const scoreModalSiteName = ref('');
+const scoreModalRemainingScore = ref('');
+
+function openScoreModal(type: 'topup' | 'deduction', row: Api.Site.Site) {
+  scoreModalType.value = type;
+  scoreModalSiteUuid.value = row.uuid;
+  scoreModalSiteName.value = row.siteName;
+  scoreModalRemainingScore.value = row.remainingScore;
+  scoreModalVisible.value = true;
 }
 </script>
 
@@ -177,6 +220,8 @@ function edit(uuid: string) {
       <template #header-extra>
         <TableHeaderOperation
           v-model:columns="columnChecks"
+          add-auth="v1:manage:site:add"
+          delete-auth="v1:manage:site:delete"
           :disabled-delete="checkedRowKeys.length === 0"
           :loading="loading"
           @add="handleAdd"
@@ -190,7 +235,7 @@ function edit(uuid: string) {
         :data="data"
         size="small"
         :flex-height="!appStore.isMobile"
-        :scroll-x="1400"
+        :scroll-x="1600"
         :loading="loading"
         remote
         :row-key="row => row.uuid"
@@ -201,6 +246,14 @@ function edit(uuid: string) {
         v-model:visible="drawerVisible"
         :operate-type="operateType"
         :row-data="editingData"
+        @submitted="getDataByPage"
+      />
+      <SiteScoreModal
+        v-model:visible="scoreModalVisible"
+        :type="scoreModalType"
+        :site-uuid="scoreModalSiteUuid"
+        :site-name="scoreModalSiteName"
+        :remaining-score="scoreModalRemainingScore"
         @submitted="getDataByPage"
       />
     </NCard>

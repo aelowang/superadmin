@@ -6,13 +6,21 @@ import (
 	"time"
 
 	"github.com/casbin/casbin/v2"
+	"github.com/zeromicro/go-zero/core/logx"
 
 	"github.com/jzero-io/jzero-admin/server/internal/global"
+	"github.com/jzero-io/jzero-admin/server/internal/logic/v1/manage/site"
 	"github.com/jzero-io/jzero-admin/server/internal/model"
+	"github.com/jzero-io/jzero-admin/server/internal/model/manage_site"
 	menutypes "github.com/jzero-io/jzero-admin/server/internal/types/v1/manage/menu"
+	"github.com/jzero-io/jzero/core/stores/condition"
 )
 
-type Custom struct{}
+const siteScoreSyncInterval = 5 * time.Minute
+
+type Custom struct {
+	syncCancel context.CancelFunc
+}
 
 func New() *Custom {
 	return &Custom{}
@@ -32,10 +40,62 @@ func (c *Custom) Init() error {
 }
 
 // Start Please add custom logic here.
-func (c *Custom) Start() {}
+func (c *Custom) Start() {
+	ctx, cancel := context.WithCancel(context.Background())
+	c.syncCancel = cancel
+	go runSiteScoreSync(ctx)
+}
 
 // Stop Please add shut down logic here.
-func (c *Custom) Stop() {}
+func (c *Custom) Stop() {
+	if c.syncCancel != nil {
+		c.syncCancel()
+	}
+}
+
+func runSiteScoreSync(ctx context.Context) {
+	ticker := time.NewTicker(siteScoreSyncInterval)
+	defer ticker.Stop()
+	doSync := func() {
+		syncCtx, cancel := context.WithTimeout(context.Background(), 2*time.Minute)
+		defer cancel()
+		sites, err := global.ServiceContext.Model.ManageSite.FindByCondition(syncCtx, nil, condition.Condition{
+			Field:    manage_site.Status,
+			Operator: condition.Equal,
+			Value:    "1",
+		})
+		if err != nil {
+			logx.Errorf("site score sync: list sites failed: %v", err)
+			return
+		}
+		for _, s := range sites {
+			if s.DbHost == "" || s.DbName == "" {
+				continue
+			}
+			remoteScore, err := site.GetRemoteSiteRemainingScore(syncCtx, s)
+			if err != nil {
+				logx.Errorf("site score sync: site %s (%s): %v", s.Uuid, s.SiteName, err)
+				continue
+			}
+			if err := global.ServiceContext.Model.ManageSite.UpdateFieldsByCondition(syncCtx, nil, map[string]any{
+				string(manage_site.RemainingScore): remoteScore,
+			}, condition.Condition{
+				Field: manage_site.Uuid, Operator: condition.Equal, Value: s.Uuid,
+			}); err != nil {
+				logx.Errorf("site score sync: site %s (%s) update local: %v", s.Uuid, s.SiteName, err)
+			}
+		}
+	}
+	doSync()
+	for {
+		select {
+		case <-ctx.Done():
+			return
+		case <-ticker.C:
+			doSync()
+		}
+	}
+}
 
 func InitCasbinRule(ctx context.Context, model model.Model, enforcer *casbin.Enforcer) error {
 	// get all role

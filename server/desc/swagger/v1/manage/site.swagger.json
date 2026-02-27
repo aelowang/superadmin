@@ -117,6 +117,63 @@
         ]
       }
     },
+    "/api/v1/manage/deductionSite": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "接口权限编码:v1:manage:site:deduction",
+        "operationId": "v1/Manage/SiteDeduction",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "remark": {
+                  "type": "string"
+                },
+                "score": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "uuid",
+                "score"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "Deduction",
+        "tags": [
+          "v1/manage/site"
+        ]
+      }
+    },
     "/api/v1/manage/deleteSite": {
       "post": {
         "consumes": [
@@ -508,6 +565,63 @@
           }
         ],
         "summary": "List",
+        "tags": [
+          "v1/manage/site"
+        ]
+      }
+    },
+    "/api/v1/manage/topupSite": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "接口权限编码:v1:manage:site:topup",
+        "operationId": "v1/Manage/SiteTopup",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "remark": {
+                  "type": "string"
+                },
+                "score": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "uuid",
+                "score"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "summary": "Topup",
         "tags": [
           "v1/manage/site"
         ]

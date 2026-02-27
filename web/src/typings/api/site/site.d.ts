@@ -131,5 +131,21 @@ declare namespace Api {
     >;
 
     type SiteDeductionList = Common.PaginatingQueryRecord<SiteDeduction>;
+
+    type TopupSiteRequest = {
+      uuid: string;
+      score: string;
+      remark?: string;
+    };
+
+    type DeductionSiteRequest = {
+      uuid: string;
+      score: string;
+      remark?: string;
+    };
+
+    type SyncRemoteScoreRequest = {
+      uuid: string;
+    };
   }
 }

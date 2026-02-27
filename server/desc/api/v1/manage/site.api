@@ -105,6 +105,28 @@ type DeleteRequest {
 
 type DeleteResponse {}
 
+type TopupRequest {
+	Uuid   string `json:"uuid"`
+	Score  string `json:"score"`
+	Remark string `json:"remark,optional"`
+}
+
+type TopupResponse {}
+
+type DeductionRequest {
+	Uuid   string `json:"uuid"`
+	Score  string `json:"score"`
+	Remark string `json:"remark,optional"`
+}
+
+type DeductionResponse {}
+
+type SyncRemoteScoreRequest {
+	Uuid string `json:"uuid"`
+}
+
+type SyncRemoteScoreResponse {}
+
 @server (
 	prefix:          /api/v1
 	group:           v1/manage/site
@@ -127,5 +149,14 @@ service server {
 
 	@handler Delete
 	post /manage/deleteSite (DeleteRequest) returns (DeleteResponse)
+
+	@handler Topup
+	post /manage/topupSite (TopupRequest) returns (TopupResponse)
+
+	@handler Deduction
+	post /manage/deductionSite (DeductionRequest) returns (DeductionResponse)
+
+	@handler SyncRemoteScore
+	post /manage/syncRemoteSiteScore (SyncRemoteScoreRequest) returns (SyncRemoteScoreResponse)
 }
 

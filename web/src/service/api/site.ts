@@ -81,3 +81,30 @@ export function AddSiteDeduction(req: Api.Site.AddSiteDeductionRequest) {
     data: req
   });
 }
+
+/** quick topup site score */
+export function TopupSite(req: Api.Site.TopupSiteRequest) {
+  return request<Api.Common.Empty>({
+    url: '/api/v1/manage/topupSite',
+    method: 'post',
+    data: req
+  });
+}
+
+/** quick deduction site score */
+export function DeductionSite(req: Api.Site.DeductionSiteRequest) {
+  return request<Api.Common.Empty>({
+    url: '/api/v1/manage/deductionSite',
+    method: 'post',
+    data: req
+  });
+}
+
+/** sync remote site remaining_score */
+export function SyncRemoteSiteScore(req: Api.Site.SyncRemoteScoreRequest) {
+  return request<Api.Common.Empty>({
+    url: '/api/v1/manage/syncRemoteSiteScore',
+    method: 'post',
+    data: req
+  });
+}

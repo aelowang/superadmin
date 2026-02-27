@@ -44,7 +44,7 @@ func (l *Add) Add(req *types.AddRequest) (resp *types.AddResponse, err error) {
 		DbName:        req.DbName,
 		JwtSecret:     req.JwtSecret,
 		AdminUrl:      req.AdminUrl,
-		AdminUsername:  req.AdminUsername,
+		AdminUsername: req.AdminUsername,
 		ContactName:   req.ContactName,
 		ContactPhone:  req.ContactPhone,
 		ContactEmail:  req.ContactEmail,

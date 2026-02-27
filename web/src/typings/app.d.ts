@@ -423,6 +423,9 @@ declare namespace App {
           add: string;
           edit: string;
           delete: string;
+          topup: string;
+          deduction: string;
+          syncRemoteScore: string;
         };
         siteTopup: {
           add: string;
@@ -665,6 +668,17 @@ declare namespace App {
           contactInfo: string;
           addSite: string;
           editSite: string;
+          quickTopup: string;
+          quickDeduction: string;
+          syncRemoteScore: string;
+          scoreModal: {
+            topupTitle: string;
+            deductionTitle: string;
+            score: string;
+            scorePlaceholder: string;
+            remarkPlaceholder: string;
+            currentScore: string;
+          };
           form: {
             siteName: string;
             siteLogo: string;

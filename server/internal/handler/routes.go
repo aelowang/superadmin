@@ -195,6 +195,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					},
 					{
 						Method:  http.MethodPost,
+						Path:    "/manage/deductionSite",
+						Handler: v1managesite.Deduction(serverCtx),
+					},
+					{
+						Method:  http.MethodPost,
 						Path:    "/manage/deleteSite",
 						Handler: v1managesite.Delete(serverCtx),
 					},
@@ -212,6 +217,16 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 						Method:  http.MethodGet,
 						Path:    "/manage/getSiteList",
 						Handler: v1managesite.List(serverCtx),
+					},
+					{
+						Method:  http.MethodPost,
+						Path:    "/manage/topupSite",
+						Handler: v1managesite.Topup(serverCtx),
+					},
+					{
+						Method:  http.MethodPost,
+						Path:    "/manage/syncRemoteSiteScore",
+						Handler: v1managesite.SyncRemoteScore(serverCtx),
 					},
 				}...,
 			),

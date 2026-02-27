@@ -205,7 +205,10 @@ const local: App.I18n.Schema = {
     site: {
       add: 'Add Site',
       edit: 'Edit Site',
-      delete: 'Delete Site'
+      delete: 'Delete Site',
+      topup: 'Topup',
+      deduction: 'Deduction',
+      syncRemoteScore: 'Sync Remote Score'
     },
     siteTopup: {
       add: 'Add Topup'
@@ -286,7 +289,7 @@ const local: App.I18n.Schema = {
       projectNews: {
         title: 'Project News',
         moreNews: 'More News',
-         desc1: 'Created the open source project jzero on April 07, 2024!',
+        desc1: 'Created the open source project jzero on April 07, 2024!',
         desc2: 'Created the open source project jzero-admin on October 14, 2024!',
         desc3: 'Continuously improving and perfecting in 2025!',
         desc4: 'Created the open source project jzero-intellij on November 30, 2025!',
@@ -449,6 +452,17 @@ const local: App.I18n.Schema = {
       contactInfo: 'Contact Info',
       addSite: 'Add Site',
       editSite: 'Edit Site',
+      quickTopup: 'Topup',
+      quickDeduction: 'Deduct',
+      syncRemoteScore: 'Sync Remote Score',
+      scoreModal: {
+        topupTitle: 'Site Topup',
+        deductionTitle: 'Site Deduction',
+        score: 'Score',
+        scorePlaceholder: 'Please enter score',
+        remarkPlaceholder: 'Please enter remark (optional)',
+        currentScore: 'Current Remaining Score'
+      },
       form: {
         siteName: 'Please enter site name',
         siteLogo: 'Please enter site logo URL',
