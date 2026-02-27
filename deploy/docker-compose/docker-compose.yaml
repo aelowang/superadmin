@@ -3,6 +3,7 @@ services:
     build:
       context: ../../server
     restart: always
+    container_name: superadmin_server
     environment:
       - TZ=Asia/Shanghai
 
@@ -12,7 +13,7 @@ services:
 
 #      # 使用 mysql
       - DRIVER_NAME=mysql
-      - DATASOURCE=root:123456@tcp(mysql:3306)/jzero-admin?charset=utf8mb4&parseTime=True&loc=Local
+      - DATASOURCE=jzero-admin:xAz8JWkakJ5zt4XN@tcp(mysql:3306)/jzero-admin?charset=utf8mb4&parseTime=True&loc=Local
 
 #      # 使用 postgres
 #      - DRIVER_NAME=pgx
@@ -20,52 +21,58 @@ services:
 
       # 使用 miniredis(内存)
       - REDIS_MINI_REDIS=true
-
+    ports:
+      - "8001:8001"
+    networks:
+        - 1panel-network
 #      # 使用 redis
 #      - REDIS_HOST=redis:6379
   web:
     build:
       context: ../../web
     restart: always
+    container_name: superadmin_web
     depends_on:
       - server
     volumes:
       - ./nginx:/etc/nginx/conf.d
     environment:
       - TZ=Asia/Shanghai
-      - VITE_SERVICE_BASE_URL=http://127.0.0.1
+      - VITE_SERVICE_BASE_URL=https://admin.pg1111.net
     ports:
-      - "80:80"
-  postgres:
-    image: postgres
-    restart: always
-    container_name: jzero-admin-postgres
-    environment:
-      TZ: Asia/Shanghai
-      POSTGRES_PASSWORD: 123456
-      POSTGRES_USER: root
-      POSTGRES_DB: jzero-admin
-    volumes:
-      - ./postgres/data:/var/lib/postgres/data
-    ports:
-      - "5432:5432"
-  mysql:
-    image: mysql:8.0
-    restart: always
-    container_name: jzero-admin-mysql
-    environment:
-      - TZ=Asia/Shanghai
-      - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_ROOT_USER=root
-      - MYSQL_DATABASE=jzero-admin
-    volumes:
-      - ./mysql/config:/etc/mysql/conf.d
-      - ./mysql/data:/var/lib/mysql
-    ports:
-      - "3306:3306"
-  redis:
-    image: redis:latest
-    restart: always
-    container_name: jzero-admin-redis
-    ports:
-      - "6379:6379"
+      - "8081:80"
+    networks:
+        - 1panel-network
+  # postgres:
+  #   image: postgres
+  #   restart: always
+  #   container_name: jzero-admin-postgres
+  #   environment:
+  #     TZ: Asia/Shanghai
+  #     POSTGRES_PASSWORD: 123456
+  #     POSTGRES_USER: root
+  #     POSTGRES_DB: jzero-admin
+  #   volumes:
+  #     - ./postgres/data:/var/lib/postgres/data
+  #   ports:
+  #     - "5432:5432"
+  # mysql:
+  #   image: mysql:8.0
+  #   restart: always
+  #   container_name: jzero-admin-mysql
+  #   environment:
+  #     - TZ=Asia/Shanghai
+  #     - MYSQL_ROOT_PASSWORD=123456
+  #     - MYSQL_ROOT_USER=root
+  #     - MYSQL_DATABASE=jzero-admin
+  #   volumes:
+  #     - ./mysql/config:/etc/mysql/conf.d
+  #     - ./mysql/data:/var/lib/mysql
+  #   ports:
+  #     - "3306:3306"
+  # redis:
+  #   image: redis:latest
+  #   restart: always
+  #   container_name: jzero-admin-redis
+  #   ports:
+  #     - "6379:6379"

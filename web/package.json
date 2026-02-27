@@ -121,7 +121,7 @@
     "vue-tsc": "2.1.6"
   },
   "simple-git-hooks": {
-    "commit-msg": "pnpm sa git-commit-verify",
+    "commit-msg": "cd web && pnpm sa git-commit-verify",
     "pre-commit": "cd web && pnpm typecheck && pnpm lint-staged"
   },
   "lint-staged": {
