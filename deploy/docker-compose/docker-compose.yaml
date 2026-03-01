@@ -30,22 +30,22 @@ services:
         - 1panel-network
 #      # 使用 redis
 #      - REDIS_HOST=redis:6379
-  web:
-    build:
-      context: ../../web
-    restart: always
-    container_name: superadmin_web
-    depends_on:
-      - server
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-    environment:
-      - TZ=Asia/Shanghai
-      - VITE_SERVICE_BASE_URL=https://admin.pg1111.net
-    ports:
-      - "8081:80"
-    networks:
-        - 1panel-network
+  # web:
+  #   build:
+  #     context: ../../web
+  #   restart: always
+  #   container_name: superadmin_web
+  #   depends_on:
+  #     - server
+  #   volumes:
+  #     - ./nginx:/etc/nginx/conf.d
+  #   environment:
+  #     - TZ=Asia/Shanghai
+  #     - VITE_SERVICE_BASE_URL=https://admin.pg1111.net
+  #   ports:
+  #     - "8081:80"
+  #   networks:
+  #       - 1panel-network
   # postgres:
   #   image: postgres
   #   restart: always

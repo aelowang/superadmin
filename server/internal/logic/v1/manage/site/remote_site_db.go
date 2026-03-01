@@ -53,9 +53,10 @@ func UpdateRemoteSiteRemainingScore(ctx context.Context, site *manage_site.Manag
 		return fmt.Errorf("ping site db: %w", err)
 	}
 
-	_, err = db.ExecContext(ctx, "UPDATE sys_sites SET remaining_score = remaining_score + ?", delta)
+	// remaining_score 随 delta 增减；仅在上分（delta>0）时增加 total_topup
+	_, err = db.ExecContext(ctx, "UPDATE sys_sites SET remaining_score = remaining_score + ?, total_topup = total_topup + GREATEST(?, 0)", delta, delta)
 	if err != nil {
-		return fmt.Errorf("update sys_sites.remaining_score: %w", err)
+		return fmt.Errorf("update sys_sites: %w", err)
 	}
 	return nil
 }

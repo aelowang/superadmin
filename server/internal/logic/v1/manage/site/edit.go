@@ -11,6 +11,8 @@ import (
 	types "github.com/jzero-io/jzero-admin/server/internal/types/v1/manage/site"
 )
 
+const passwordPlaceholder = "******"
+
 type Edit struct {
 	logx.Logger
 	ctx    context.Context
@@ -42,10 +44,14 @@ func (l *Edit) Edit(req *types.EditRequest) (resp *types.EditResponse, err error
 	newData.Remark = req.Remark
 	newData.DbHost = req.DbHost
 	newData.DbUsername = req.DbUsername
-	newData.DbPassword = req.DbPassword
+	if req.DbPassword != passwordPlaceholder {
+		newData.DbPassword = req.DbPassword
+	}
 	newData.DbPort = req.DbPort
 	newData.DbName = req.DbName
-	newData.JwtSecret = req.JwtSecret
+	if req.JwtSecret != passwordPlaceholder {
+		newData.JwtSecret = req.JwtSecret
+	}
 	newData.AdminUrl = req.AdminUrl
 	newData.AdminUsername = req.AdminUsername
 	newData.ContactName = req.ContactName
