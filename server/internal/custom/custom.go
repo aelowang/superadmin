@@ -54,6 +54,7 @@ func (c *Custom) Stop() {
 }
 
 func runSiteScoreSync(ctx context.Context) {
+	logx.Info("site score sync: background task started (interval: every 5m)")
 	ticker := time.NewTicker(siteScoreSyncInterval)
 	defer ticker.Stop()
 	doSync := func() {
@@ -68,13 +69,22 @@ func runSiteScoreSync(ctx context.Context) {
 			logx.Errorf("site score sync: list sites failed: %v", err)
 			return
 		}
+		var toSync []*manage_site.ManageSite
 		for _, s := range sites {
-			if s.DbHost == "" || s.DbName == "" {
-				continue
+			if s.DbHost != "" && s.DbName != "" {
+				toSync = append(toSync, s)
 			}
+		}
+		if len(toSync) == 0 {
+			logx.Infof("site score sync: run done, enabled sites=%d, with db config=0 (skip)", len(sites))
+			return
+		}
+		logx.Infof("site score sync: run started, syncing %d site(s)", len(toSync))
+		synced := 0
+		for _, s := range toSync {
 			remoteScore, err := site.GetRemoteSiteRemainingScore(syncCtx, s)
 			if err != nil {
-				logx.Errorf("site score sync: site %s (%s): %v", s.Uuid, s.SiteName, err)
+				logx.Errorf("site score sync: site %s (%s) get remote failed: %v", s.Uuid, s.SiteName, err)
 				continue
 			}
 			if err := global.ServiceContext.Model.ManageSite.UpdateFieldsByCondition(syncCtx, nil, map[string]any{
@@ -82,14 +92,19 @@ func runSiteScoreSync(ctx context.Context) {
 			}, condition.Condition{
 				Field: manage_site.Uuid, Operator: condition.Equal, Value: s.Uuid,
 			}); err != nil {
-				logx.Errorf("site score sync: site %s (%s) update local: %v", s.Uuid, s.SiteName, err)
+				logx.Errorf("site score sync: site %s (%s) update local failed: %v", s.Uuid, s.SiteName, err)
+				continue
 			}
+			synced++
+			logx.Infof("site score sync: [OK] site %s (%s) remaining_score=%.2f", s.Uuid, s.SiteName, remoteScore)
 		}
+		logx.Infof("site score sync: run finished, synced %d/%d site(s)", synced, len(toSync))
 	}
 	doSync()
 	for {
 		select {
 		case <-ctx.Done():
+			logx.Info("site score sync: background task stopped")
 			return
 		case <-ticker.C:
 			doSync()
